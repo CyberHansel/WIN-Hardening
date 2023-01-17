@@ -140,7 +140,7 @@ cmd.exe /c "regreg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters"
 #IPv6 source routing must be configured to highest protection  
 cmd.exe /c "regreg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /v DisableIPSourceRouting /t REG_DWORD /d 2 /f"    
 #Local administrator accounts must have their privileged token filtered to prevent elevated privileges from being used over the network on domain systems.  
-# https://www.harmj0y.net/blog/redteaming/pass-the-hash-is-dead-long-live-localaccounttokenfilterpolicy/  
+#https://www.harmj0y.net/blog/redteaming/pass-the-hash-is-dead-long-live-localaccounttokenfilterpolicy/  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 0 /f
 
 
