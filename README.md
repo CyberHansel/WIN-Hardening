@@ -1,4 +1,4 @@
-# WIN-10 Hardening
+# #WIN-10 Hardening
 
 
 ## #STIG HIGH Severity
@@ -33,7 +33,7 @@ cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v RestrictAnony
 #Autoplay must be disabled for all drives  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer" /v NoDriveTypeAutoRun /t REG_DWORD /d 255 /f"  
 
-## STIG Medium Severity  
+## #STIG Medium Severity  
 
 #Enable anti-spoofing for facial recognition  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Biometrics\FacialFeatures" /v EnhancedAntiSpoofing /t REG_DWORD /d 1 /f"  
