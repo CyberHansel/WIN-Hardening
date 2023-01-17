@@ -126,7 +126,12 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Internet Set
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v PreventOverrideAppRepUnknown /t REG_DWORD /d 1 /f"   
 #Users must not be allowed to ignore Windows Defender SmartScreen filter warnings for malicious websites in Microsoft Edge  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v PreventOverride /t REG_DWORD /d 1 /f"   
-#The Windows Defender SmartScreen filter for Microsoft Edge must be enabled    
+#
+#Automatically signing in the last interactive user after a system-initiated restart must be disabled  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v DisableAutomaticRestartSignOn /t REG_DWORD /d 1 /f"  
+#chatGPT - This will prevent the Bluetooth service from starting automatically when the system boots up  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters" /v "Start" /t REG_DWORD /d 4 /f"  
+
 
 
 
