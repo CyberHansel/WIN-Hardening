@@ -203,6 +203,7 @@ cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLeg
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription" /v EnableTranscripting /t REG_DWORD /d 1 /f" 
 #Enable PowerShell Logging  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" /v EnableModuleLogging /t REG_DWORD /d 1 /f"  
+#PowerShell script block logging must be enabled on Windows 10
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" /v EnableScriptBlockLogging /t REG_DWORD /d 1 /f"  
 #  
 #The system must be configured to meet the minimum session security requirement for NTLM SSP based clients  
@@ -229,7 +230,32 @@ cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers" /v
 #Early Launch Antimalware, Boot-Start Driver Initialization Policy must prevent boot drivers
 #8 - Good only, 1 - Good and unknown, 3 - Good, unknown and bad but critical, 7 - All (which includes "Bad" and would be a finding) 
 cmd.exe /c "reg add "HKCU\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" /v DriverLoadPolicy /t REG_DWORD /d 3 /f"  
-#
+#User Account Control must automatically deny elevation requests for standard users
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v ConsentPromptBehaviorUser /t REG_DWORD /d 0 /f"  
+#User Account Control must, at minimum, prompt administrators for consent on the secure desktop  
+cmd.exe /c "regreg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 2 /f"  
+#  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #  
 #GPO policies  
