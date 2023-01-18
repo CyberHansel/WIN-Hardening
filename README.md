@@ -263,7 +263,15 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanWorkStation\Parameters" /v "RequireSecuritySignature" /t REG_DWORD /d 1 /f"  
 #The Windows SMB server must be configured to always perform SMB packet signing  
 cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "RequireSecuritySignature" /t REG_DWORD /d 1 /f"  
-#
+#Windows 10 must be configured to prevent Windows apps from being activated by voice while the system is locked  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v LetAppsActivateWithVoiceAboveLock /t REG_DWORD /d 2 /f"  
+#Windows Update must not obtain updates from other PCs on the Internet  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v DODownloadMode /t REG_DWORD /d 0 /f"    
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f"  
+#Turning off File Explorer heap termination on corruption must be disabled  
+cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v NoHeapTerminationOnCorruption /t REG_DWORD /d 0 /f"  
+#  
+
 
 
 
