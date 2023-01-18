@@ -162,7 +162,7 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowG
 #Local drives must be prevented from sharing with Remote Desktop Session Hosts  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fDisableCdm /t REG_DWORD /d 1 /f"  
 #
-
+ 
 
 
 
