@@ -298,6 +298,9 @@ cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLeg
 
 
 
+#No remote clients may launch servers or connect to objects on this computer. Local clients cannot access remote DCOM servers; all DCOM traffic is blocked  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Ole" /v EnableDCOM /t REG_DWORD /d N /f"  
+
 
 
 
