@@ -255,7 +255,15 @@ cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\batfile\shell\runasuser 
 cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\cmdfile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
 cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
 cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\mscfile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
-#  
+#The required legal notice must be configured to display before console logon  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v LegalNoticeText /t REG_SZ /d "You are accessing a United Federation Government Information System (IS) that is provided for Starfleet-authorized use only. System is inside puma cat protected" /f"  
+#The Smart Card removal option must be configured to Force Logoff or Lock Workstation (Set to "2" for logoff, set to "1" for lock)  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v SCRemoveOption /t REG_DWORD /d 2 /f"  
+#The Windows SMB client must be configured to always perform SMB packet signing  
+cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanWorkStation\Parameters" /v "RequireSecuritySignature" /t REG_DWORD /d 1 /f"  
+#The Windows SMB server must be configured to always perform SMB packet signing  
+cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "RequireSecuritySignature" /t REG_DWORD /d 1 /f"  
+#
 
 
 
