@@ -191,13 +191,6 @@ cmd.exe /c "regreg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\W
 #Local accounts with blank passwords must be restricted to prevent access from the network  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 1 /f" 
 #  
-#AUDIT  
-#Audit policy using subcategories must be enabled  
-cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"  
-#  
-#  
-#  
-#  
 #POWERSHELL  
 #PowerShell Transcription must be enabled on Windows 10  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription" /v EnableTranscripting /t REG_DWORD /d 1 /f" 
@@ -265,37 +258,24 @@ cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanWorkStation\Pa
 cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "RequireSecuritySignature" /t REG_DWORD /d 1 /f"  
 #Windows 10 must be configured to prevent Windows apps from being activated by voice while the system is locked  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v LetAppsActivateWithVoiceAboveLock /t REG_DWORD /d 2 /f"  
+
+## #STIG Low Severity
+
 #Windows Update must not obtain updates from other PCs on the Internet  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v DODownloadMode /t REG_DWORD /d 0 /f"    
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f"  
 #Turning off File Explorer heap termination on corruption must be disabled  
 cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v NoHeapTerminationOnCorruption /t REG_DWORD /d 0 /f"  
-#  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#The system must be configured to ignore NetBIOS name release requests except from WINS servers (prevents a denial of service (DoS) attack)  
+cmd.exe /c "regreg add "HKLM\SYSTEM\CurrentControlSet\Services\Netbt\Parameters" /v NoNameReleaseOnDemand /t REG_DWORD /d 1 /f"  
+#he Application Compatibility Program Inventory must be prevented from collecting data and sending the information to Microsoft  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v DisableInventory /t REG_DWORD /d 1 /f"  
+#Windows 10 should be configured to prevent users from receiving suggestions for third-party or additional applications  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v DisableThirdPartySuggestions /t REG_DWORD /d 1 /f"  
+#The default permissions of global system objects must be increased (Windows systems maintain a global list of shared system resources such as DOS device names,  
+#mutexes, and semaphores, allowing non-admin users to read shared objects, but not modify shared objects)  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v ProtectionMode /t REG_DWORD /d 1 /f"  
+#
 #  
 #GPO policies  
 #  
@@ -304,7 +284,12 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{3537
 #Connections to non-domain networks when connected to a domain authenticated network must be blocked  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fBlockNonDomain /t REG_DWORD /d 1 /f"  
 #Simultaneous connections to the Internet or a Windows domain must be limited  
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fMinimizeConnections /t REG_DWORD /d 1 /f"
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fMinimizeConnections /t REG_DWORD /d 1 /f"  
+#  
+#
+#AUDIT  
+#Audit policy using subcategories must be enabled  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"
 
 
 
