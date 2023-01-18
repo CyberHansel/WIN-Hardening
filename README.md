@@ -165,6 +165,7 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Servic
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v EnablePlainTextPassword /t REG_DWORD /d 0 /f"  
 #Administrator accounts must not be enumerated during elevation  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI" /v EnumerateAdministrators /t REG_DWORD /d 0 /f"  
+#  
 #PASSWORD
 #ChatGPT - The minimum password age must be configured to at least 1 day (86400 seconds = 1 day)
 cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v "MinimumPasswordAge" /t REG_DWORD /d 86400 /f"  
@@ -174,8 +175,22 @@ cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v
 cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v PasswordFilter /t REG_DWORD /d 1 /f"
 #ChatGPT - The number of allowed bad logon attempts must be configured to 3 or less  
 cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v "LockoutThreshold" /t REG_DWORD /d 3 /f"  
+#ChatGPT - The period of time before the bad logon counter is reset must be configured to 15 minutes  
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v "LockoutDuration" /t REG_DWORD /d 900 /f"  
+#The convenience PIN for Windows 10 must be disabled  
+cmd.exe /c "reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v AllowDomainPINLogon /t REG_DWORD /d 0 /f"  
 #  
-#
+#Windows Ink Workspace must be configured to disallow access above the lock  
+cmd.exe /c "reg add "HKLM\Software\Policies\Microsoft\WindowsInkWorkspace" /v AllowWindowsInkWorkspace /t REG_DWORD /d 1 /f"   
+#The network selection user interface (UI) must not be displayed on the logon screen and cant be changed without signing into Windows  
+#Prevent Local windows wireless exploitation: the Airstrike attack https://shenaniganslabs.io/2021/04/13/Airstrike.html
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v DontDisplayNetworkSelectionUI /t REG_DWORD /d 1 /f"  
+#WDigest Authentication must be disabled. When the WDigest Authentication protocol is enabled, plain text passwords are stored in the Local Security Authority  
+#Subsystem Service (LSASS) exposing them to theft.  
+cmd.exe /c "regreg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 0"  
+#Local accounts with blank passwords must be restricted to prevent access from the network  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 1 /f"  
+
 
 
 
