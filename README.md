@@ -161,8 +161,22 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\PassportForWork" /v Requir
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f"   
 #Local drives must be prevented from sharing with Remote Desktop Session Hosts  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fDisableCdm /t REG_DWORD /d 1 /f"  
+#Unencrypted passwords must not be sent to third-party SMB Servers (Could impact consumer grade file shares!)  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" /v EnablePlainTextPassword /t REG_DWORD /d 0 /f"  
+#Administrator accounts must not be enumerated during elevation  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI" /v EnumerateAdministrators /t REG_DWORD /d 0 /f"  
+#PASSWORD
+#ChatGPT - The minimum password age must be configured to at least 1 day (86400 seconds = 1 day)
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v "MinimumPasswordAge" /t REG_DWORD /d 86400 /f"  
+#ChatGPT - Passwords must, at a minimum, be 14 characters
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v minPwdLength /t REG_DWORD /d 14 /f"  
+#ChatGPT - The built-in Microsoft password complexity filter must be enabled  
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v PasswordFilter /t REG_DWORD /d 1 /f"
+#ChatGPT - The number of allowed bad logon attempts must be configured to 3 or less  
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" /v "LockoutThreshold" /t REG_DWORD /d 3 /f"  
+#  
 #
- 
+
 
 
 
