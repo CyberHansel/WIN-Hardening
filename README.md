@@ -244,7 +244,20 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Sys
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled /t REG_DWORD /d 1 /f"  
 #Wi-Fi Sense must be disabled (as of v1803 of Windows 10; Wi-Fi sense is no longer available)  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" /v AutoConnectAllowedOEM /t REG_DWORD /d 0 /f"  
-#
+#Windows 10 must be configured to prioritize ECC Curves with longer key lengths first
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" /v EccCurves /t REG_MULTI_SZ /d NistP384 NistP256 /f"  
+#Internet connection sharing must be disabled 
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Network Connections" /v NC_ShowSharedAccessUI /t REG_DWORD /d 0 /f"  
+#Insecure logons to an SMB server must be disabled (guest acc SMB)  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation" /v AllowInsecureGuestAuth /t REG_DWORD /d 0 /f"  
+#Run as different user must be removed from context menus  
+cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\batfile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
+cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\cmdfile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
+cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\exefile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
+cmd.exe /c "reg add HKEY_LOCAL_MACHINE\SOFTWARE\Classes\mscfile\shell\runasuser /v SuppressionPolicy /t REG_DWORD /d 4096 /f"  
+#  
+
+
 
 
 
@@ -273,7 +286,9 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" /
 #Group Policy objects must be reprocessed even if they have not changed. Any unauthorized changes are forced to match the domain-based group policy settings again  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}" /v NoGPOListChanges /t REG_DWORD /d 0 /f"  
 #Connections to non-domain networks when connected to a domain authenticated network must be blocked  
-cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fBlockNonDomain /t REG_DWORD /d 1 /f"
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fBlockNonDomain /t REG_DWORD /d 1 /f"  
+#Simultaneous connections to the Internet or a Windows domain must be limited  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fMinimizeConnections /t REG_DWORD /d 1 /f"
 
 
 
