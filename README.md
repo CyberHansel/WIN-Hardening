@@ -216,6 +216,27 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Exp
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters" /v SignSecureChannel /t REG_DWORD /d 1 /f"  
 #Zone information must be preserved when saving attachments  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation /t REG_DWORD /d 2 /f"  
+#User Account Control must virtualize file and registry write failures to per-user locations  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableVirtualization /t REG_DWORD /d 1 /f"  
+#User Account Control must run all administrators in Admin Approval Mode, enabling UAC, limiting the elevation of privileges  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 1 /f"  
+#Downloading print driver packages over HTTP must be prevented  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers" /v DisableWebPnPDownload /t REG_DWORD /d 1 /f"  
+#Web publishing and online ordering wizards must be prevented from downloading a list of providers  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoWebServices /t REG_DWORD /d 1 /f"   
+#Printing over HTTP must be prevented  
+cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Printers" /v DisableHTTPPrinting /t REG_DWORD /d 1 /f"  
+#Early Launch Antimalware, Boot-Start Driver Initialization Policy must prevent boot drivers
+#8 - Good only, 1 - Good and unknown, 3 - Good, unknown and bad but critical, 7 - All (which includes "Bad" and would be a finding) 
+cmd.exe /c "reg add "HKCU\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" /v DriverLoadPolicy /t REG_DWORD /d 3 /f"  
+#
+
+#  
+#GPO policies  
+#  
+#Group Policy objects must be reprocessed even if they have not changed. Any unauthorized changes are forced to match the domain-based group policy settings again  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}" /v NoGPOListChanges /t REG_DWORD /d 0 /f"  
+
 
 
 
