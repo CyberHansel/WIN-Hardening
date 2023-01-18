@@ -37,6 +37,8 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Exp
 
 #Enable anti-spoofing for facial recognition  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Biometrics\FacialFeatures" /v EnhancedAntiSpoofing /t REG_DWORD /d 1 /f"  
+#Disable Disable SMBv3 compression to block unauthenticated attackers from exploiting the vulnerability against an SMBv3 Server (not in STIG) 
+cmd.exe /c "reg add "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v DisableCompression /t REG_DWORD /d 1 /f"
 #The Windows Defender SmartScreen for Explorer must be enabled  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v EnableSmartScreen /t REG_DWORD /d 1 /f"  
 #Explorer Data Execution Prevention must be enabled  
