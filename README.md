@@ -189,7 +189,34 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v DontDis
 #Subsystem Service (LSASS) exposing them to theft.  
 cmd.exe /c "regreg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\WDigest /v UseLogonCredential /t REG_DWORD /d 0"  
 #Local accounts with blank passwords must be restricted to prevent access from the network  
-cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 1 /f"  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 1 /f" 
+#  
+#AUDIT  
+#Audit policy using subcategories must be enabled  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"  
+#  
+#  
+#  
+#  
+#POWERSHELL  
+#PowerShell Transcription must be enabled on Windows 10  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription" /v EnableTranscripting /t REG_DWORD /d 1 /f" 
+#Enable PowerShell Logging  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging" /v EnableModuleLogging /t REG_DWORD /d 1 /f"  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging" /v EnableScriptBlockLogging /t REG_DWORD /d 1 /f"  
+#  
+#The system must be configured to meet the minimum session security requirement for NTLM SSP based clients  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" /v NTLMMinClientSec /t REG_DWORD /d 537395200 /f"  
+#The system must be configured to meet the minimum session security requirement for NTLM SSP based servers  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" /v NTLMMinServerSec /t REG_DWORD /d 537395200 /f"  
+#The Windows Explorer Preview pane must be disabled for Windows 10  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoPreviewPane /t REG_DWORD /d 1 /f"  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoReadingPane /t REG_DWORD /d 1 /f"  
+#Outgoing secure channel traffic must be signed when possible  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters" /v SignSecureChannel /t REG_DWORD /d 1 /f"  
+#Zone information must be preserved when saving attachments  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v SaveZoneInformation /t REG_DWORD /d 2 /f"  
+
 
 
 
