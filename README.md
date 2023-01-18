@@ -234,7 +234,17 @@ cmd.exe /c "reg add "HKCU\SYSTEM\CurrentControlSet\Policies\EarlyLaunch" /v Driv
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v ConsentPromptBehaviorUser /t REG_DWORD /d 0 /f"  
 #User Account Control must, at minimum, prompt administrators for consent on the secure desktop  
 cmd.exe /c "regreg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 2 /f"  
-#  
+#User Account Control must be configured to detect application installations and prompt for elevation  
+cmd.exe /c reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableInstallerDetection /t REG_DWORD /d 1 /f"  
+#The system must be configured to use FIPS-compliant algorithms for encryption, hashing, and signing  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy" /v Enabled /t REG_DWORD /d 1 /f"  
+#User Account Control must only elevate UIAccess applications that are installed in secure locations  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableSecureUIAPaths /t REG_DWORD /d 1 /f"  
+#Command line data must be included in process creation events (eventid 4688)   
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Audit" /v ProcessCreationIncludeCmdLine_Enabled /t REG_DWORD /d 1 /f"  
+#Wi-Fi Sense must be disabled (as of v1803 of Windows 10; Wi-Fi sense is no longer available)  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config" /v AutoConnectAllowedOEM /t REG_DWORD /d 0 /f"  
+#
 
 
 
@@ -262,7 +272,8 @@ cmd.exe /c "regreg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\
 #  
 #Group Policy objects must be reprocessed even if they have not changed. Any unauthorized changes are forced to match the domain-based group policy settings again  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}" /v NoGPOListChanges /t REG_DWORD /d 0 /f"  
-
+#Connections to non-domain networks when connected to a domain authenticated network must be blocked  
+cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fBlockNonDomain /t REG_DWORD /d 1 /f"
 
 
 
