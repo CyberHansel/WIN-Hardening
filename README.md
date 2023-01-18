@@ -118,7 +118,8 @@ cmd.exe /c "reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer" /v Safe
 #EDGE
 #The Windows Defender SmartScreen filter for Microsoft Edge must be enabled 
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v EnabledV9 /t REG_DWORD /d 1 /f"
-#The password manager function in the Edge browser must be disabled  
+#The password manager function in the Edge browser must be disabled (2 locations below, dunno which one key correct 1st from STIG!) 
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "FormSuggest Passwords" /t REG_SZ /d no /f"
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "FormSuggest Passwords" /t REG_SZ /d no /f"  
 #Windows 10 must be configured to prevent certificate error overrides in Microsoft Edge  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Internet Settings" /v PreventCertErrorOverrides /t REG_DWORD /d 1 /f"   
@@ -152,7 +153,15 @@ cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Paramet
 cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}" /v Value /t REG_DWORD /d 1 /f"  
 #ChatGPT -   Windows 10 account lockout duration must be configured to 15 minutes or greater
 cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "LockoutDuration" /t REG_SZ /d 900 /f"  
-
+#Windows 10 must be configured to require a minimum pin length of six characters or greater  
+cmd.exe /c "regreg add "HKLM\SOFTWARE\Policies\Microsoft\PassportForWork\PINComplexity" /v MinimumPINLength /t REG_DWORD /d 6 /f"  
+#The use of a hardware security device with Windows Hello for Business must be enabled  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\PassportForWork" /v RequireSecurityDevice /t REG_DWORD /d 1 /f"  
+#Windows 10 must be configured to disable Windows Game Recording and Broadcasting  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /v AllowGameDVR /t REG_DWORD /d 0 /f"   
+#Local drives must be prevented from sharing with Remote Desktop Session Hosts  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services" /v fDisableCdm /t REG_DWORD /d 1 /f"  
+#
 
 
 
