@@ -142,7 +142,17 @@ cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters" /
 #Local administrator accounts must have their privileged token filtered to prevent elevated privileges from being used over the network on domain systems.  
 #https://www.harmj0y.net/blog/redteaming/pass-the-hash-is-dead-long-live-localaccounttokenfilterpolicy/  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v LocalAccountTokenFilterPolicy /t REG_DWORD /d 0 /f"  
-cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v FilterAdministratorToken /t REG_DWORD /d 1 /f
+cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v FilterAdministratorToken /t REG_DWORD /d 1 /f  
+#The Server Message Block (SMB) v1 protocol must be disabled on the SMB client  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\mrxsmb10" /v Start /t REG_DWORD /d 4 /f"  
+#The Server Message Block (SMB) v1 protocol must be disabled on the SMB server  
+cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v SMB1 /t REG_DWORD /d 0 /f"  
+#  
+#ChatGPT - The system must notify the user when a Bluetooth device attempts to connect  
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}" /v Value /t REG_DWORD /d 1 /f"  
+#ChatGPT -   Windows 10 account lockout duration must be configured to 15 minutes or greater
+cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "LockoutDuration" /t REG_SZ /d 900 /f"  
+
 
 
 
