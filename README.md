@@ -1,8 +1,5 @@
 # #WIN-10 Hardening
-
-
 ## #STIG HIGH Severity
-
 #Anonymous access to Named Pipes and Shares must be restricted  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" /v RestrictNullSessAccess /t REG_DWORD /d 1 /f"  
 #Anonymous enumeration of shares must be restricted  
@@ -32,9 +29,7 @@ cmd.exe /c "reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Exp
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v RestrictAnonymousSAM /t REG_DWORD /d 1 /f"  
 #Autoplay must be disabled for all drives  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\policies\Explorer" /v NoDriveTypeAutoRun /t REG_DWORD /d 255 /f"  
-
 ## #STIG Medium Severity  
-
 #Enable anti-spoofing for facial recognition  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Biometrics\FacialFeatures" /v EnhancedAntiSpoofing /t REG_DWORD /d 1 /f"  
 #Disable Disable SMBv3 compression to block unauthenticated attackers from exploiting the vulnerability against an SMBv3 Server (not in STIG) 
@@ -117,19 +112,6 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer" /v EnableUserControl /t REG_DWORD /d 0 /f"  
 #Users must be notified if a web-based program attempts to install software  
 cmd.exe /c "reg add "HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer" /v SafeForScripting /t REG_DWORD /d 0 /f"  
-#EDGE
-#The Windows Defender SmartScreen filter for Microsoft Edge must be enabled 
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v EnabledV9 /t REG_DWORD /d 1 /f"
-#The password manager function in the Edge browser must be disabled (2 locations below, dunno which one key correct 1st from STIG!) 
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "FormSuggest Passwords" /t REG_SZ /d no /f"
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "FormSuggest Passwords" /t REG_SZ /d no /f"  
-#Windows 10 must be configured to prevent certificate error overrides in Microsoft Edge  
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Internet Settings" /v PreventCertErrorOverrides /t REG_DWORD /d 1 /f"   
-#Users must not be allowed to ignore Windows Defender SmartScreen filter warnings for unverified files in Microsoft Edge  
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v PreventOverrideAppRepUnknown /t REG_DWORD /d 1 /f"   
-#Users must not be allowed to ignore Windows Defender SmartScreen filter warnings for malicious websites in Microsoft Edge  
-cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v PreventOverride /t REG_DWORD /d 1 /f"   
-#
 #Automatically signing in the last interactive user after a system-initiated restart must be disabled  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v DisableAutomaticRestartSignOn /t REG_DWORD /d 1 /f"  
 #chatGPT - This will prevent the Bluetooth service from starting automatically when the system boots up  
@@ -150,7 +132,6 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Sys
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\mrxsmb10" /v Start /t REG_DWORD /d 4 /f"  
 #The Server Message Block (SMB) v1 protocol must be disabled on the SMB server  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters" /v SMB1 /t REG_DWORD /d 0 /f"  
-#  
 #ChatGPT - The system must notify the user when a Bluetooth device attempts to connect  
 cmd.exe /c "reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global{e0cbf06c-cd8b-4647-bb8a-263b43f0f974}" /v Value /t REG_DWORD /d 1 /f"  
 #ChatGPT -   Windows 10 account lockout duration must be configured to 15 minutes or greater
@@ -193,7 +174,7 @@ cmd.exe /c "regreg add HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\W
 #Local accounts with blank passwords must be restricted to prevent access from the network  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v LimitBlankPasswordUse /t REG_DWORD /d 1 /f" 
 #  
-#POWERSHELL  
+#  > POWERSHELL <  
 #PowerShell Transcription must be enabled on Windows 10  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription" /v EnableTranscripting /t REG_DWORD /d 1 /f" 
 #Enable PowerShell Logging  
@@ -260,9 +241,7 @@ cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanWorkStation\Pa
 cmd.exe /c "reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "RequireSecuritySignature" /t REG_DWORD /d 1 /f"  
 #Windows 10 must be configured to prevent Windows apps from being activated by voice while the system is locked  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v LetAppsActivateWithVoiceAboveLock /t REG_DWORD /d 2 /f"  
-
 ## #STIG Low Severity
-
 #Windows Update must not obtain updates from other PCs on the Internet  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" /v DODownloadMode /t REG_DWORD /d 0 /f"    
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f"  
@@ -277,18 +256,13 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v D
 #The default permissions of global system objects must be increased (Windows systems maintain a global list of shared system resources such as DOS device names,  
 #mutexes, and semaphores, allowing non-admin users to read shared objects, but not modify shared objects)  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v ProtectionMode /t REG_DWORD /d 1 /f"  
-#
-#  
 ## #GPO policies  
-#  
 #Group Policy objects must be reprocessed even if they have not changed. Any unauthorized changes are forced to match the domain-based group policy settings again  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}" /v NoGPOListChanges /t REG_DWORD /d 0 /f"  
 #Connections to non-domain networks when connected to a domain authenticated network must be blocked  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fBlockNonDomain /t REG_DWORD /d 1 /f"  
 #Simultaneous connections to the Internet or a Windows domain must be limited  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fMinimizeConnections /t REG_DWORD /d 1 /f"  
-#  
-#
 ## #AUDIT  
 #Audit policy using subcategories must be enabled  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"
@@ -328,10 +302,7 @@ Set-MpPreference -CheckForSignaturesBeforeRunningScan 1
 Set-MpPreference -MAPSReporting 2  
 #If a user visits a malicious IP address or domain, an event will be recorded in the Windows event log but the user will not be blocked from visiting the address  
 Set-MpPreference -EnableNetworkProtection Enabled  
-
-
 ## #Block Office applications from creating child processes  
-
 powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids D4F940AB-401B-4EFC-AADC-AD5F3C50688A -AttackSurfaceReductionRules_Actions Enabled  
 #Block Office applications from injecting code into other processes  
 powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids 75668C1F-73B5-4CF0-BB93-3ECF5CB7CC84 -AttackSurfaceReductionRules_Actions Enabled  
@@ -365,9 +336,7 @@ powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids D1E49AAC-8F56-4
 powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids 56A863A9-875E-4185-98A7-B882C64B5CE5 -AttackSurfaceReductionRules_Actions Enabled  
 #Enable Controlled Folder  
 powershell.exe Set-MpPreference -EnableControlledFolderAccess Enabled  
-
 ## #Harden all version of MS Office against common malspam attacks, Disables Macros, enables ProtectedView  
-
 #https://decentsecurity.com/block-office-macros/  
 reg add "HKCU\Software\Policies\Microsoft\Office\12.0\Publisher\Security" /v vbawarnings /t REG_DWORD /d 4 /f  
 reg add "HKCU\Software\Policies\Microsoft\Office\12.0\Word\Security" /v vbawarnings /t REG_DWORD /d 4 /f  
@@ -397,9 +366,7 @@ reg add "HKCU\Software\Microsoft\Office\15.0\Word\Options" /v DontUpdateLinks /t
 reg add "HKCU\Software\Microsoft\Office\15.0\Word\Options\WordMail" /v DontUpdateLinks /t REG_DWORD /d 00000001 /f  
 reg add "HKCU\Software\Microsoft\Office\16.0\Word\Options" /v DontUpdateLinks /t REG_DWORD /d 00000001 /f  
 reg add "HKCU\Software\Microsoft\Office\16.0\Word\Options\WordMail" /v DontUpdateLinks /t REG_DWORD /d 00000001 /f  
-
 ## #Harden Adobe Acrobat  
-
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cCloud" /f  
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cDefaultLaunchURLPerms" /f  
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices" /f  
@@ -428,10 +395,7 @@ reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cSharePo
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cWebmailProfiles" /v "bDisableWebmail" /t REG_DWORD /d 1 /f  
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cWelcomeScreen" /v "bShowWelcomeScreen" /t REG_DWORD /d 0 /f  
 reg add "HKLM\Software\Wow6432Node\Adobe\Acrobat Reader\DC\Installer" /v "DisableMaintenance" /t REG_DWORD /d 1 /f  
-
-
 ## #FILE TYPES EXTENSION BLOCK TO NOTEPAD
-
 ftype batfile="%systemroot%\system32\notepad.exe" "%1"  
 ftype chmfile="%systemroot%\system32\notepad.exe" "%1"  
 ftype cmdfile="%systemroot%\system32\notepad.exe" "%1"  
@@ -468,11 +432,7 @@ ftype rdgfile="%systemroot%\system32\notepad.exe" "%1"
 #https://blog.redxorblue.com/2020/07/one-click-to-compromise-fun-with.html  
 ftype applicationfile="%systemroot%\system32\notepad.exe" "%1"  
 ftype deployfile="%systemroot%\system32\notepad.exe" "%1"  
-
-
 ## #Enable and Configure Google Chrome Internet Browser Settings  
-
- 
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AdvancedProtectionAllowed" /t REG_DWORD /d 1 /f  
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AllowCrossOriginAuthPrompt" /t REG_DWORD /d 0 /f  
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AlwaysOpenPdfExternally" /t REG_DWORD /d 0 /f  
@@ -515,7 +475,19 @@ reg add "HKLM\Software\Policies\Google\Chrome" /v "UserFeedbackAllowed" /t REG_D
 reg add "HKLM\Software\Policies\Google\Chrome" /v "DNSInterceptionChecksEnabled" /t REG_DWORD /d 1 /f  
 reg add "HKLM\Software\Policies\Google\Chrome" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d 0 /f  
 reg add "HKLM\Software\Policies\Google\Chrome\Recommended" /v "RestoreOnStartup" /t REG_DWORD /d 1 /f  
-reg add "HKLM\Software\Policies\Google\Chrome\Recommended" /v "TranslateEnabled" /t REG_DWORD /d 0 /f  
+reg add "HKLM\Software\Policies\Google\Chrome\Recommended" /v "TranslateEnabled" /t REG_DWORD /d 0 /f   
+## #EDGE
+#The Windows Defender SmartScreen filter for Microsoft Edge must be enabled 
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v EnabledV9 /t REG_DWORD /d 1 /f"
+#The password manager function in the Edge browser must be disabled (2 locations below, dunno which one key correct 1st from STIG!) 
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "FormSuggest Passwords" /t REG_SZ /d no /f"
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "FormSuggest Passwords" /t REG_SZ /d no /f"  
+#Windows 10 must be configured to prevent certificate error overrides in Microsoft Edge  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Internet Settings" /v PreventCertErrorOverrides /t REG_DWORD /d 1 /f"   
+#Users must not be allowed to ignore Windows Defender SmartScreen filter warnings for unverified files in Microsoft Edge  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v PreventOverrideAppRepUnknown /t REG_DWORD /d 1 /f"   
+#Users must not be allowed to ignore Windows Defender SmartScreen filter warnings for malicious websites in Microsoft Edge  
+cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v PreventOverride /t REG_DWORD /d 1 /f"    
 ## #Windows Firewall
 #Block Win32/64 binaries (LOLBins) from making net connections when they shouldn't
 netsh Advfirewall set allprofiles state on  
