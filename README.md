@@ -292,7 +292,18 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
 #AUDIT  
 #Audit policy using subcategories must be enabled  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"
-
+Auditpol /set /subcategory:"Security Group Management" /success:enable /failure:enable  
+Auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable  
+Auditpol /set /subcategory:"Logoff" /success:enable /failure:disable  
+Auditpol /set /subcategory:"Logon" /success:enable /failure:enable  
+Auditpol /set /subcategory:"Filtering Platform Connection" /success:enable /failure:disable  
+Auditpol /set /subcategory:"Removable Storage" /success:enable /failure:enable  
+Auditpol /set /subcategory:"SAM" /success:disable /failure:disable  
+Auditpol /set /subcategory:"Filtering Platform Policy Change" /success:disable /failure:disable  
+Auditpol /set /subcategory:"IPsec Driver" /success:enable /failure:enable  
+Auditpol /set /subcategory:"Security State Change" /success:enable /failure:enable  
+Auditpol /set /subcategory:"Security System Extension" /success:enable /failure:enable  
+Auditpol /set /subcategory:"System Integrity" /success:enable /failure:enable  
 
 
 
@@ -421,15 +432,6 @@ reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cWelcome
 reg add "HKLM\Software\Wow6432Node\Adobe\Acrobat Reader\DC\Installer" /v "DisableMaintenance" /t REG_DWORD /d 1 /f  
 
 
-
-
-
-
-
-
-
-
-
 ## FILE TYPES EXTENSION BLOCK TO NOTEPAD
 
 ftype batfile="%systemroot%\system32\notepad.exe" "%1"  
@@ -470,11 +472,10 @@ ftype applicationfile="%systemroot%\system32\notepad.exe" "%1"
 ftype deployfile="%systemroot%\system32\notepad.exe" "%1"  
 
 
-
-###############################################################
- Enable and Configure Google Chrome Internet Browser Settings
-###############################################################
-
+###############################################################  
+ Enable and Configure Google Chrome Internet Browser Settings  
+ ###############################################################  
+ 
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AdvancedProtectionAllowed" /t REG_DWORD /d 1 /f  
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AllowCrossOriginAuthPrompt" /t REG_DWORD /d 0 /f  
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AlwaysOpenPdfExternally" /t REG_DWORD /d 0 /f  
