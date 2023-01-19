@@ -279,7 +279,7 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v D
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager" /v ProtectionMode /t REG_DWORD /d 1 /f"  
 #
 #  
-#GPO policies  
+## #GPO policies  
 #  
 #Group Policy objects must be reprocessed even if they have not changed. Any unauthorized changes are forced to match the domain-based group policy settings again  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Group Policy\{35378EAC-683F-11D2-A89A-00C04FBBCFA2}" /v NoGPOListChanges /t REG_DWORD /d 0 /f"  
@@ -289,7 +289,7 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
 cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy" /v fMinimizeConnections /t REG_DWORD /d 1 /f"  
 #  
 #
-#AUDIT  
+## #AUDIT  
 #Audit policy using subcategories must be enabled  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"
 Auditpol /set /subcategory:"Security Group Management" /success:enable /failure:enable  
@@ -306,13 +306,10 @@ Auditpol /set /subcategory:"Security System Extension" /success:enable /failure:
 Auditpol /set /subcategory:"System Integrity" /success:enable /failure:enable  
 
 
-
-
-
 #No remote clients may launch servers or connect to objects on this computer. Local clients cannot access remote DCOM servers; all DCOM traffic is blocked  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Ole" /v EnableDCOM /t REG_DWORD /d N /f"  
 
-## DEFENDER   
+## #DEFENDER   
 #Enable Windows Defender sandboxing  
 setx /M MP_FORCE_USE_SANDBOX 1  
 #Signature update interval 4h interval  
@@ -333,8 +330,8 @@ Set-MpPreference -MAPSReporting 2
 Set-MpPreference -EnableNetworkProtection Enabled  
 
 
+## #Block Office applications from creating child processes  
 
-#Block Office applications from creating child processes  
 powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids D4F940AB-401B-4EFC-AADC-AD5F3C50688A -AttackSurfaceReductionRules_Actions Enabled  
 #Block Office applications from injecting code into other processes  
 powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids 75668C1F-73B5-4CF0-BB93-3ECF5CB7CC84 -AttackSurfaceReductionRules_Actions Enabled  
@@ -369,7 +366,8 @@ powershell.exe Add-MpPreference -AttackSurfaceReductionRules_Ids 56A863A9-875E-4
 #Enable Controlled Folder  
 powershell.exe Set-MpPreference -EnableControlledFolderAccess Enabled  
 
-#Harden all version of MS Office against common malspam attacks, Disables Macros, enables ProtectedView  
+## #Harden all version of MS Office against common malspam attacks, Disables Macros, enables ProtectedView  
+
 #https://decentsecurity.com/block-office-macros/  
 reg add "HKCU\Software\Policies\Microsoft\Office\12.0\Publisher\Security" /v vbawarnings /t REG_DWORD /d 4 /f  
 reg add "HKCU\Software\Policies\Microsoft\Office\12.0\Word\Security" /v vbawarnings /t REG_DWORD /d 4 /f  
@@ -400,8 +398,8 @@ reg add "HKCU\Software\Microsoft\Office\15.0\Word\Options\WordMail" /v DontUpdat
 reg add "HKCU\Software\Microsoft\Office\16.0\Word\Options" /v DontUpdateLinks /t REG_DWORD /d 00000001 /f  
 reg add "HKCU\Software\Microsoft\Office\16.0\Word\Options\WordMail" /v DontUpdateLinks /t REG_DWORD /d 00000001 /f  
 
+## #Harden Adobe Acrobat  
 
-##Harden Adobe Acrobat  
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cCloud" /f  
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cDefaultLaunchURLPerms" /f  
 reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cServices" /f  
@@ -432,7 +430,7 @@ reg add "HKLM\Software\Policies\Adobe\Acrobat Reader\DC\FeatureLockDown\cWelcome
 reg add "HKLM\Software\Wow6432Node\Adobe\Acrobat Reader\DC\Installer" /v "DisableMaintenance" /t REG_DWORD /d 1 /f  
 
 
-## FILE TYPES EXTENSION BLOCK TO NOTEPAD
+## #FILE TYPES EXTENSION BLOCK TO NOTEPAD
 
 ftype batfile="%systemroot%\system32\notepad.exe" "%1"  
 ftype chmfile="%systemroot%\system32\notepad.exe" "%1"  
@@ -472,9 +470,8 @@ ftype applicationfile="%systemroot%\system32\notepad.exe" "%1"
 ftype deployfile="%systemroot%\system32\notepad.exe" "%1"  
 
 
-###############################################################  
- Enable and Configure Google Chrome Internet Browser Settings  
- ###############################################################  
+## #Enable and Configure Google Chrome Internet Browser Settings  
+
  
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AdvancedProtectionAllowed" /t REG_DWORD /d 1 /f  
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "AllowCrossOriginAuthPrompt" /t REG_DWORD /d 0 /f  
