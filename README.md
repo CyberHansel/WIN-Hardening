@@ -266,19 +266,65 @@ cmd.exe /c "reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy
 ## #AUDIT  
 #Audit policy using subcategories must be enabled  
 cmd.exe /c "reg add "HKLM\SYSTEM\CurrentControlSet\Control\Lsa" /v SCENoApplyLegacyAuditPolicy /t REG_DWORD /d 1 /f"
-Auditpol /set /subcategory:"Security Group Management" /success:enable /failure:enable  
-Auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable  
-Auditpol /set /subcategory:"Logoff" /success:enable /failure:disable  
-Auditpol /set /subcategory:"Logon" /success:enable /failure:enable  
-Auditpol /set /subcategory:"Filtering Platform Connection" /success:enable /failure:disable  
-Auditpol /set /subcategory:"Removable Storage" /success:enable /failure:enable  
-Auditpol /set /subcategory:"SAM" /success:disable /failure:disable  
-Auditpol /set /subcategory:"Filtering Platform Policy Change" /success:disable /failure:disable  
-Auditpol /set /subcategory:"IPsec Driver" /success:enable /failure:enable  
-Auditpol /set /subcategory:"Security State Change" /success:enable /failure:enable  
-Auditpol /set /subcategory:"Security System Extension" /success:enable /failure:enable  
-Auditpol /set /subcategory:"System Integrity" /success:enable /failure:enable  
-
+Auditpol /set /subcategory:"Account Lockout" /success:enable /failure:enable
+Auditpol /set /subcategory:"Application Generated" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Application Group Management" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Audit Policy Change" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Authentication Policy Change" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Authorization Policy Change" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Central Policy Staging" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Certification Services" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Computer Account Management" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Credential Validation" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Detailed Directory Service Replication" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Detailed File Share" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Directory Service Access" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Directory Service Changes" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Directory Service Replication" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Distribution Group Management" /success:enable /failure:enable 
+Auditpol /set /subcategory:"DPAPI Activity" /success:enable /failure:enable 
+Auditpol /set /subcategory:"File Share" /success:enable /failure:enable 
+Auditpol /set /subcategory:"File System" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Filtering Platform Connection" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Filtering Platform Packet Drop" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Filtering Platform Policy Change" /success:enable /failure:enable
+Auditpol /set /subcategory:"Group Membership" /success:enable /failure:enable
+Auditpol /set /subcategory:"Handle Manipulation" /success:enable /failure:enable 
+Auditpol /set /subcategory:"IPsec Driver" /success:enable /failure:enable
+Auditpol /set /subcategory:"IPsec Extended Mode" /success:enable /failure:enable
+Auditpol /set /subcategory:"IPsec Main Mode" /success:enable /failure:enable
+Auditpol /set /subcategory:"IPsec Quick Mode" /success:enable /failure:enable
+Auditpol /set /subcategory:"Kerberos Authentication Service" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Kerberos Service Ticket Operations" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Kernel Object" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Logoff" /success:enable /failure:enable
+Auditpol /set /subcategory:"Logon" /success:enable /failure:enable
+Auditpol /set /subcategory:"MPSSVC Rule-Level Policy Change" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Network Policy Server" /success:enable /failure:enable
+Auditpol /set /subcategory:"Non Sensitive Privilege Use" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Other Account Logon Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Other Account Management Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Other Logon/Logoff Events" /success:enable /failure:enable
+Auditpol /set /subcategory:"Other Object Access Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Other Policy Change Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Other Privilege Use Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Other System Events" /success:enable /failure:enable
+Auditpol /set /subcategory:"Plug and Play Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Process Termination" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Registry" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Removable Storage" /success:enable /failure:enable 
+Auditpol /set /subcategory:"RPC Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"SAM" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Security Group Management" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Security State Change" /success:enable /failure:enable
+Auditpol /set /subcategory:"Security System Extension" /success:enable /failure:enable
+Auditpol /set /subcategory:"Sensitive Privilege Use" /success:enable /failure:enable 
+Auditpol /set /subcategory:"Special Logon" /success:enable /failure:enable |
+Auditpol /set /subcategory:"System Integrity" /success:enable /failure:enable
+Auditpol /set /subcategory:"Token Right Adjusted Events" /success:enable /failure:enable 
+Auditpol /set /subcategory:"User Account Management" /success:enable /failure:enable 
+Auditpol /set /subcategory:"User / Device Claims" /success:enable /failure:enable
 
 #No remote clients may launch servers or connect to objects on this computer. Local clients cannot access remote DCOM servers; all DCOM traffic is blocked  
 cmd.exe /c "reg add "HKLM\SOFTWARE\Microsoft\Ole" /v EnableDCOM /t REG_DWORD /d N /f"  
@@ -597,9 +643,9 @@ netsh advfirewall firewall add rule name="Block wmic.exe netconns" program="%sys
 
 netsh advfirewall firewall add rule name="Block wscript.exe netconns" program="%systemroot%\SysWOW64\wscript.exe" protocol=tcp dir=out enable=yes action=block profile=any
 
-#Enable Firewall Logging
-#---------------------
-netsh advfirewall set currentprofile logging filename %systemroot%\system32\LogFiles\Firewall\pfirewall.log  
+#Enable Firewall Logging  
+#---------------------  
+netsh advfirewall set currentprofile logging filename %systemroot%\system32\LogFiles\Firewall\pfirewall.log    
 netsh advfirewall set currentprofile logging maxfilesize 4096  
 netsh advfirewall set currentprofile logging droppedconnections enable  
 
