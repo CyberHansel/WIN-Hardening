@@ -67,8 +67,12 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Cryptography\Configuration\SSL\00010002" /v EccCurves /t REG_MULTI_SZ /d "NistP384\0NistP256" /f
 
 
-
-
+# $PSVersionTable.PSVersion   << Check for stable version
+# Get-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowerShellV2  << Check for PS v2.0
+# Disable powershell v2.0 with powershell 
+Disable-WindowsOptionalFeature -Online -FeatureName MicrosoftWindowsPowershellV2 -Remove
+# Disable with dism tool below
+# dism /online /disable-feature /featurename:MicrosoftWindowsPowerShellV2 /norestart
 
 
 
